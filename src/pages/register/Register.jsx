@@ -2,14 +2,16 @@ import React from 'react'
 import CustomBtn from '../../components/customBtn/CustomBtn'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import useAuth from '../../hooks/useAuth'
 
 const Register = () => {
 
     const { register, handleSubmit, reset, formState: { errors, touchedFields } } = useForm()
 
+    const { registerUser } = useAuth();
 
     const submitHandler = data => {
-        console.log(data);
+        registerUser(data);
     }
 
     return (
