@@ -11,9 +11,9 @@ const Login = () => {
                     <input type="text" placeholder="Enter your Email or Phone no..." className="input input-bordered w-full " />
                     <input type="password" placeholder="Enter your pin..." className="input input-bordered w-full " />
                     <CustomBtn text={'Login'} btnType={"submit"} style={"hover:bg-themeSecondary hover:text-white"} type="submit" />
-                    <p>Dont have an account? <Link to={"/register"}><span className='text-themePrimary'>Register</span></Link></p>
+                    <p>Dont have an account? <Link to={"/register"}><span className='text-themePrimary font-medium'>Register</span></Link></p>
                 </form>
-                
+
             </div>
         </div>
     )
