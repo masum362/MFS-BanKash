@@ -7,7 +7,7 @@ const Login = () => {
 
     const { handleSubmit, register, formState: { errors, touchedFields } } = useForm();
 
-    const submitHandler = data => {
+    const submitHandler = async(data) => {
         console.log(data)
     }
 

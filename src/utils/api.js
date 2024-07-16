@@ -11,7 +11,7 @@ const commonGetUrl = async (url, data) => {
         Authorization: 'Bearer ' + token
       }
     });
-    return response.data;
+    return response;
   } catch (error) {
     return error;
   }
@@ -24,7 +24,7 @@ const commonPostUrl = async (url, data) => {
         Authorization: 'Bearer ' + token
       }
     });
-    return response.data;
+    return response;
   } catch (error) {
     return error;
   }

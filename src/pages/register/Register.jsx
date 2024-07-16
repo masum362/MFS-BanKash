@@ -1,21 +1,48 @@
 import React from 'react'
 import CustomBtn from '../../components/customBtn/CustomBtn'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import useAuth from '../../hooks/useAuth'
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { commonPostUrl } from '../../utils/api'
+
 
 const Register = () => {
 
     const { register, handleSubmit, reset, formState: { errors, touchedFields } } = useForm()
 
     const { registerUser } = useAuth();
+    const navigate = useNavigate();
 
-    const submitHandler = data => {
-        registerUser(data);
+    const submitHandler = async (data) => {
+        const response = await commonPostUrl("register", data)
+        try {
+            if (response.status === 200) {
+                toast('🦄 user register successfully!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+                console.log(response.data);
+                setTimeout(() => {
+                    navigate("/login");
+                }, 2000);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
         <div className='flex items-center justify-center h-screen'>
+            <ToastContainer />
             <div className=' md:w-[80%] lg:w-[50%] w-full space-y-6'>
                 <form onSubmit={handleSubmit(submitHandler)} className='flex flex-col  gap-8 m-8 md:m-16 p-8 shadow-lg shadow-themePrimary' >
                     <h1 className='text-5xl font-bold text-center'>Register</h1>
