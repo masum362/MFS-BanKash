@@ -1,20 +1,21 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import CustomBtn from '../../components/customBtn/CustomBtn'
 // import useAuth from '../../hooks/useAuth'
 import Logo from '../../components/logo/Logo'
+import useAuth from '../../hooks/useAuth'
 
 const Navbar = () => {
-  const user = null;
+    const { user, setUser } = useAuth();
     // const { user, LogOutUser } = useAuth();
     // console.log(user)
 
-    // const handleLogOut = () => {
-    //     LogOutUser().then(res => {
-    //         console.log('user logged out');
-    //     })
-
-    // }
+    const navigate = useNavigate();
+    const handleLogOut = () => {
+        localStorage.removeItem('token');
+        setUser(null)
+        navigate("/login");
+    }
 
     return (
         <div>
@@ -44,30 +45,12 @@ const Navbar = () => {
                 <div className='navbar-end text-lg font-semibold gap-4 '>
                     {
                         user ? <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img alt="User profile picture" src={user?.photoURL} />
-                                </div>
+                            <div tabIndex={0} role="button" className="">
+                                <h1 className='uppercase font-bold bg-themePrimary text-center text-white px-3 py-2 rounded-full'>{user?.email[0]}</h1>
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  bg-base-100 rounded-box w-52  text-lg ">
-                                <h1 className='text-2xl font-bold text-center m-4 text-themePrimary'>{user?.displayName}</h1>
-                                <li>
-                                    {
-                                        user?.role === "user" && <Link to={"/user/my-profile"} className="justify-between hover:text-themePrimary capitalize active:text-themeSecondary hover:bg-themeSecondary active:bg-themePrimary text-black">
-                                            Dashboard
-                                        </Link>
-                                    }
-                                    {
-                                        user?.role === "admin" && <Link to={"/admin/statistics"} className="justify-between hover:text-themePrimary capitalize active:text-themeSecondary hover:bg-themeSecondary active:bg-themePrimary text-black">
-                                            Dashboard
-                                        </Link>
-                                    }
-                                    {
-                                        user?.role === "moderator" && <Link to={"/moderator/product-reviews"} className="justify-between hover:text-themePrimary capitalize active:text-themeSecondary hover:bg-themeSecondary active:bg-themePrimary text-black">
-                                            Dashboard
-                                        </Link>
-                                    }
-                                </li>
+                                <h1 className='text-2xl font-bold text-center m-4 text-themePrimary'>{user?.name}</h1>
+
                                 <li><button onClick={handleLogOut} className='hover:text-themePrimary capitalize active:text-themeSecondary hover:bg-themeSecondary text-black'>Logout</button></li>
                             </ul>
                         </div> : <>

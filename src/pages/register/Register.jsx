@@ -16,10 +16,10 @@ const Register = () => {
     const navigate = useNavigate();
 
     const submitHandler = async (data) => {
-        const response = await commonPostUrl("register", data)
+        const response = await registerUser(data)
         try {
             if (response.status === 200) {
-                toast('🦄 user register successfully!', {
+                toast.success('🦄 user register successfully!', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -36,7 +36,17 @@ const Register = () => {
                 }, 2000);
             }
         } catch (error) {
-            console.log(error);
+            toast.error('something went wrong!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
         }
     }
 

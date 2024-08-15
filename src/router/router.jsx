@@ -3,6 +3,7 @@ import App from '../App';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import Register from '../pages/register/Register';
+import UserAuth from '../components/userAuth/UserAuth';
 
 
 const router = createBrowserRouter([
@@ -13,14 +14,14 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />
+                element: <UserAuth><Home /></UserAuth>
             },
             {
-                path:"/login",
+                path: "/login",
                 element: <Login />
             },
             {
-                path:"/register",
+                path: "/register",
                 element: <Register />
             },
         ]
@@ -28,4 +29,4 @@ const router = createBrowserRouter([
 ])
 
 
-export {router}
+export { router }
